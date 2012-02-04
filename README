@@ -1,0 +1,37 @@
+En el despacho utilizamos ownCloud v.3, conectando con el servidor por medio de WebDAV, para enviar y almacenar información y archivos que necesitamos acceder desde nuestros teléfonos inteligentes, tabletas y/o desde la web.
+
+Una de las funcionas que mas utilizamos desde las tabletas, es la función de enviar enlaces al Servidor para leerlos mas tarde, al estilo de Evernote o Catch.
+
+En las tabletas Android utilizamos el software WebDAV File Manager, ENLACE, este programa crea en el apartado personal de cada usuario del ownCloud un archivo, que utiliza de almacén de enlaces, llamado “ShareURL.html”.
+
+El archivo “ShareURL.html” es donde el WebDAV File Manager almacena los enlaces, uno sobre otro, y el usuario no puede hacer modificaciones ni agregar mas información que la que este programa envía al Servidor.
+
+Una función que echamos en falta fue el poder eliminar los enlaces, una vez visitados, o modificarlos, para ello reutilizamos una aplicación que escribimos hace un tiempo, notasSI, y la adaptamos para que leyese el archivo “ShareURL.html” y almacenase los enlaces en una base de datos y poder “trabajar” sobre los enlaces desde un navegador web.
+
+El programa es muy sencillo, está en fase beta, y nos falta aún mucha programación, la aplicación, que llamamos notasSI+, funciona de la siguiente manera:
+
+1- Leer el archivo “ShareURL.html” desde los documentos del usuario
+2- Procesa el contenido, ( Título, Fecha, Enlace )
+3- Carga los datos en la base de datos
+4- Renombra el archivo “ShareURL.html”
+
+Accediendo a la página principal de notasSI+, se muestra una tabla con todas las notas.
+
+Aún nos falta programar:
+1- Acceso a notasSI+ utilizando usuario / clave
+2- Panel de configuración y administración de usuarios
+3- Función de multiusuario, solo funciona con un solo usuario
+
+
+Para acceder al código fuente, en nuestra repositorio de GitHUB, en el archivo “inc/framework.php” se deben configurar :
+
+A- Información de la Base de datos
+B- Información de donde se almacenan los archivos de ownCloud
+
+En la base de datos, el usuario se almacena en texto plano y la contraseña se almacena el hash MD5
+
+
+Contacto
+
+info@serinformaticos.es
+www.SerInformaticos.es
