@@ -5,12 +5,8 @@ include('../inc/header.php');
 
 if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
 mysql00();
-$array01 = menu01();
-foreach ( $array01 as $value){
-	echo $value;
-}
 /*
-<!--
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -43,11 +39,16 @@ foreach ( $array01 as $value){
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
+$array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
 
-$today = date("m-d-y");
+
+$today = date("y-m-d");
 $random = php05('0','1000');
 $myFile = $directorio."/ShareURL.html";
-$myFile2 = $directorio."/ShareURL.".$today."-".$random.".html";
+$myFile2 = $directorio."/URL_Cargados/ShareURL.".$today."-".$random.".html";
 
 $fh = fopen($myFile, 'r');
 $theData = fread($fh, filesize($myFile));
@@ -115,13 +116,39 @@ for( $ii = '0' ; $ii < $totalAray ; $ii++ ){
 
 foreach( $theData3 as $value ){
 	if( $value['titulo'] != '' ){
+		// comprueba que no exista el enlace en el servidor
 /*
 		echo $value['titulo']."<br />\n";
 		echo $value['fecha']."<br />\n";
 		echo $value['enlace']."<br />\n";
 */
-		mysql_query("insert into notas (titulo, fecha, texto, enlace, tag)
-			values ('$value[titulo]','$value[fecha]','Sin Contenido','$value[enlace]','ownCloud')");
+
+		$campos = 'id';
+		$tabla = 'notas';
+		$columna1 = 'titulo';
+		$queBuscar1 = $value['titulo'];
+		$resultado1 = mysql02($campos,$tabla,$columna1,$queBuscar1);
+		echo $resultado1."<br /> \n";
+
+		$campos = 'id';
+		$tabla = 'notas';
+		$columna1 = 'fecha';
+		$queBuscar1 = $value['fecha'];
+		$resultado2 = mysql02($campos,$tabla,$columna1,$queBuscar1);
+		echo $resultado2."<br /> \n";
+
+		$campos = 'id';
+		$tabla = 'notas';
+		$columna1 = 'enlace';
+		$queBuscar1 = $value['enlace'];
+		$resultado3 = mysql02($campos,$tabla,$columna1,$queBuscar1);
+		echo $resultado3."<br /> \n";
+
+		if( empty($resultado1) OR empty($resultado2) OR empty($resultado3) ){
+			echo "A<br />\n";
+			mysql_query("insert into notas (titulo, fecha, texto, enlace, tag)
+				values ('$value[titulo]','$value[fecha]','Sin Contenido','$value[enlace]','ownCloud')");
+		}
 	}
 }
 
@@ -132,7 +159,7 @@ print_r($theData3);
 echo "</pre>";
 */
 
-echo "<meta http-equiv='refresh' content='0;URL=ver.php'>";
+// echo "<meta http-equiv='refresh' content='0;URL=ver.php'>";
 ?>
 
 <?php
