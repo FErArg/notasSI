@@ -52,7 +52,7 @@ foreach ( $array01 as $value){
 
 <?php
 print "<br />\n";
-$campos = 'id, titulo, fecha, tag';
+$campos = 'id, titulo, fecha, tag, enlace';
 $tabla1 = 'notas';
 $columna1 = 'usuario';
 $queBuscar1 = $usuarioId;
