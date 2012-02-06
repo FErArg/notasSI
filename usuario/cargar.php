@@ -147,7 +147,7 @@ foreach( $theData3 as $value ){
 	}
 }
 
-// rename($myFile, $myFile2);
+rename($myFile, $myFile2);
 /*
 echo "<pre>";
 print_r($theData3);
