@@ -1,16 +1,6 @@
 <?php
-session_start();
-include('../inc/framework.php');
-include('../inc/header.php');
-
-if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
-mysql00();
-$array01 = menu01();
-foreach ( $array01 as $value){
-	echo $value;
-}
-?>
-<!--
+/*
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -43,7 +33,18 @@ foreach ( $array01 as $value){
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
--->
+session_start();
+include('../inc/framework.php');
+include('../inc/header.php');
+
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
+$array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
+?>
+
 <div class="cabecera">
 </div><!-- CAB -->
 
@@ -52,17 +53,18 @@ foreach ( $array01 as $value){
 <?php
 // print "<br />\n";
 extract($_POST);
-/*
+
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
-*/
-	mysql_query("DELETE FROM $tabla WHERE id='$id'");
+
+
+// mysql_query("DELETE FROM $tabla WHERE id='$id'");
+mysql_query("UPDATE notas SET eliminado='1' WHERE id='$id'");
 
 // redireccionar de nuevo a index
-echo "<meta http-equiv='refresh' content='0;URL=index.php'>";
 echo mysql_error();
-
+echo "<meta http-equiv='refresh' content='0;URL=index.php'>";
 ?>
 </div><!-- Medio -->
 

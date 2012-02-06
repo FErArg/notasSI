@@ -1,16 +1,6 @@
 <?php
-session_start();
-include('../inc/framework.php');
-include('../inc/header.php');
-
-if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
-mysql00();
-$array01 = menu01();
-foreach ( $array01 as $value){
-	echo $value;
-}
-?>
-<!--
+/*
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -43,7 +33,18 @@ foreach ( $array01 as $value){
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
--->
+session_start();
+include('../inc/framework.php');
+include('../inc/header.php');
+
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
+$array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
+?>
+
 
 <div class="cabecera">
 </div><!-- CAB -->
@@ -81,16 +82,17 @@ echo "<form action=\"editar3.php\" method=\"POST\">\n";
 echo "<input type=\"hidden\" name=\"tabla\" value=\"notas\" />\n";
 echo "<input type=\"hidden\" name=\"id\" value=\"".$array01['ID']."\" />\n";
 
-echo "<table border=1>";
+echo "<table id=\"one-column-emphasis\" >
+    <colgroup>
+    	<col class=\"oce-first\" />
+    </colgroup>
+    <tbody>";
 	echo "<tr>";
 		echo "<td>";
 			echo "ID";
 		echo "</td>\n";
 		echo "<td>";
 			echo $array01['ID'];
-		echo "</td>\n";
-		echo "<td>";
-			echo "Nueva Informaci&oacute;n";
 		echo "</td>\n";
 	echo "<tr>";
 		echo "<td>";
@@ -99,19 +101,13 @@ echo "<table border=1>";
 		echo "<td>";
 			echo $array01['Fecha'];
 		echo "</td>\n";
-		echo "<td>";
-			echo $fechaHoy;
-		echo "</td>\n";
 	echo "</tr>\n";
 	echo "<tr>";
 		echo "<td>";
 			echo "T&iacute;tulo";
 		echo "</td>\n";
 		echo "<td>";
-			echo $array01['Titulo'];
-		echo "</td>\n";
-		echo "<td>";
-			echo "<input type=\"text\" class=\"text\" name=\"titulo2\" size=\"30\" maxlength=\"30\" />";
+			echo "<input type=\"text\" class=\"text\" name=\"titulo2\" size=\"50\" maxlength=\"50\" value=\"".$array01['Titulo']."\" />";
 		echo "</td>\n";
 	echo "</tr>\n";
 	echo "<tr>";
@@ -119,14 +115,7 @@ echo "<table border=1>";
 			echo "Nota";
 		echo "</td>\n";
 		echo "<td>";
-			if( empty($array01['Nota']) ){
-				echo "Sin Informaci&oacute;n";
-			} else{
-				echo $array01['Nota'];
-			}
-		echo "</td>\n";
-		echo "<td>";
-			echo "<textarea cols=\"34\" rows=\"3\" name=\"texto2\">".$array01['Nota']."</textarea>";
+			echo "<textarea cols=\"50\" rows=\"3\" name=\"texto2\">".$array01['Nota']."</textarea>";
 		echo "</td>\n";
 	echo "</tr>\n";
 	echo "<tr>";
@@ -134,10 +123,7 @@ echo "<table border=1>";
 			echo "Enlace";
 		echo "</td>\n";
 		echo "<td>";
-			echo $array01['Enlace'];
-		echo "</td>\n";
-		echo "<td>";
-			echo "<textarea cols=\"34\" rows=\"3\" name=\"enlace2\">".$array01['Nota']."</textarea>";
+			echo "<textarea cols=\"50\" rows=\"3\" name=\"enlace2\">".$array01['Enlace']."</textarea>";
 		echo "</td>\n";
 	echo "</tr>\n";
 
@@ -146,9 +132,7 @@ echo "<table border=1>";
 			echo "Tag";
 		echo "</td>\n";
 		echo "<td>";
-			echo $array01['Tag'];
-		echo "</td>\n";
-		echo "<td>";
+			echo $array01['Tag']." ";
 			echo "<select class=\"tag\" id=\"tag\" name=\"tag2\">";
 			echo "<option value=\"\" selected=\"selected\"></option>";
 			// busca tags y las convierte en seleccionables
@@ -159,7 +143,8 @@ echo "<table border=1>";
 			echo "</select>";
 		echo "</td>\n";
 	echo "</tr>\n";
-echo "</table>";
+echo "</tbody>\n</table>\n";
+echo "<button type=\"button\"><a href=\"index.php\">Volver</a></button>";
 echo "<input id=\"saveForm\" class=\"button_text\" type=\"submit\" name=\"submit\" value=\"Enviar\" />";
 echo "</form>";
 

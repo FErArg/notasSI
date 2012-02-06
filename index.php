@@ -1,9 +1,6 @@
 <?php
-include('inc/framework.php');
-include('inc/header.php');
-?>
-<h2>notaSI+</h2>
-<!--
+/*
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -36,7 +33,10 @@ include('inc/header.php');
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
--->
+include('inc/framework.php');
+include('inc/header.php');
+?>
+<h2>notaSI+</h2>
 <table style="text-align: center; width: 100%; heigh: 100%;">
 	<tr style="vertical-align: middle; text-align: center;">
 		<td>

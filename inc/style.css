@@ -1,6 +1,3 @@
-<?php
-/*
- <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -33,81 +30,72 @@
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
-session_start();
-include('../inc/framework.php');
-include('../inc/header.php');
 
-if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
-mysql00();
-$array01 = menu01();
-foreach ( $array01 as $value){
-	echo $value;
+/* Tabla "usuario/ver.php" */
+#box-table-a
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 25px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
 }
-?>
-
-<div class="cabecera">
-</div><!-- CAB -->
-
-<div class="medio">
-
-<?php
-print "<br />\n";
-extract($_POST);
-/*
-echo "<pre>";
-	print_r($_POST);
-echo "</pre>";
-*/
-$query = "SELECT fecha, titulo, texto, enlace, tag FROM notas WHERE id = '$id'";
-$array00 = mysql03($query);
-
-$array01 = array(
-	'ID' => $id,
-	'Fecha' => $array00[0],
-	'Titulo' => $array00[1],
-	'Nota' => $array00[2],
-	'Enlace' => $array00[3],
-	'Tag' => $array00[4]);
-
-$array2 = tabla01($array01);
-foreach ( $array2 as $value){
-	echo $value;
+#box-table-a th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-top: 4px solid #aabcfe;
+	border-bottom: 1px solid #fff;
+	color: #039;
 }
-echo "<br />\n";
-echo "<table>\n";
-echo "<tr>\n";
-echo "<td>\n";
-// Editar Nota
-echo "<form action=\"editar2.php\" method=\"POST\">\n";
-echo "<input type=\"hidden\" name=\"tabla\" value=\"notas\" />\n";
-echo "<input type=\"hidden\" name=\"id\" value=\"".$id."\" />\n";
-echo "<input id=\"saveForm\" class=\"button_text\" type=\"submit\" name=\"submit\" value=\"Editar\" />";
-echo "</form>";
-echo "</td>\n";
-echo "<td>\n";
-// Eliminar Nota
-echo "<form action=\"eliminar3.php\" method=\"POST\">\n";
-echo "<input type=\"hidden\" name=\"tabla\" value=\"notas\" />\n";
-echo "<input type=\"hidden\" name=\"id\" value=\"".$id."\" />\n";
-echo "<input id=\"saveForm\" class=\"button_text\" type=\"submit\" name=\"submit\" value=\"Eliminar\" />";
-echo "</form>";
-echo "</td>\n";
-echo "</tr>\n";
-echo "</table>\n";
-
-?>
-</div><!-- Medio -->
-
-<div class="pie">
-</div><!-- pie -->
-
-
-<?php
-// Control de la sesion ----------------------------------------------------------------------
-} else{
-		print"<h3>No ha iniciado Sesi&oacute;n Correctamente</h3><br />\n";
-		print"<br />\n<a href=\"../index.php\" class=\"botonR\">Volver</a><br /><br />\n";
+#box-table-a td
+{
+	padding: 8px;
+	background: #e8edff;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
 }
-// Control de la sesion ----------------------------------------------------------------------
-include('../inc/footer.php');
-?>
+#box-table-a tr:hover td
+{
+	background: #d0dafd;
+	color: #339;
+}
+
+/* Tabla "usuario/ver2.php" */
+#one-column-emphasis
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#one-column-emphasis th
+{
+	font-size: 14px;
+	font-weight: normal;
+	padding: 12px 15px;
+	color: #039;
+}
+#one-column-emphasis td
+{
+	padding: 10px 15px;
+	color: #669;
+	border-top: 1px solid #e8edff;
+}
+.oce-first
+{
+	background: #d0dafd;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+}
+#one-column-emphasis tr:hover td
+{
+	color: #339;
+	background: #eff2ff;
+}

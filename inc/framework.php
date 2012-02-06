@@ -2,9 +2,8 @@
 /*
  * Funciones escritas por Fernando A. Rodriguez para el uso en SerInformaticos.es
  * Framework v2
- */
 /*
-<!--
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -38,9 +37,11 @@
 	#                                                                                                 #
 	**************************************************************************************************/
 
+
 // Personalizaciones
 $db="catchSI";
 $directorio="/var/www/owncloud/data/".$_SESSION['usuario']."/files";
+$usuarioId=$_SESSION['usuarioId'];
 
 // Menu
 function menu00($array){
@@ -128,7 +129,7 @@ function mysql00($servidor,$usuario,$clave,$db){
 		$servidor="SERVIDOR";
 		$usuario="USUARIO";
 		$clave="CLAVE";
-		$db="BASEdeDATOS";
+		$db="DB";
 	}
 
 	$enlace=mysql_connect($servidor,$usuario,$clave);
@@ -153,7 +154,7 @@ $campos = '';
 $tabla = '';
 $columna1 = '';
 $queBuscar1 = '';
-mysql02($campos,$tabla,$columna1,$queBuscar1);
+resultado = mysql02($campos,$tabla,$columna1,$queBuscar1);
 */
 }
 
@@ -402,26 +403,6 @@ foreach( $resultado as $value){
 */
 }
 
-// busca datos en tabla, y debe cumplir 2 condicionantes, limita la salida
-// segun valor de $limite, y lo ordena en DESC / ASC segun se pase en $orden
-function mysql15($campo, $tabla, $columna1, $buscarEnColumna1, $columna2, $buscarEnColumna2, $colFecha, $limite, $orden){
-	$query01="SELECT $campo FROM $tabla WHERE $columna1 = '$buscarEnColumna1' AND $columna2 = '$buscarEnColumna2' ORDER BY $colFecha $orden Limit $limite; ";
-    $query02=mysql_query($query01);
-	$resultado = array();
-	while($line = mysql_fetch_array($query02, MYSQL_ASSOC)){
-		$resultado[] = $line;
-	}
-	return $resultado;
-/*
-Como ver los datos
-foreach( $resultado as $value){
-	foreach( $value as $value){
-		echo $value."<br />";
-	}
-}
-*/
-}
-
 //cuenta numero de resultados de busqueda con una condicion
 function mysql16($campos,$tabla,$enQueColumna,$queBuscarEnColumna){
 	$query1="select count($campos) from $tabla where $enQueColumna = '$queBuscarEnColumna';";
@@ -516,7 +497,7 @@ $columna1 = '';
 $valorNuevo1 = '';
 $columnaBuscar = '';
 $queBuscar = '';
-mysql22($tabla, $columna1, $valorNuevo1, $columnaBuscar, $queBuscar);
+$resultado = mysql22($tabla, $columna1, $valorNuevo1, $columnaBuscar, $queBuscar);
 */
 }
 
@@ -525,7 +506,7 @@ mysql22($tabla, $columna1, $valorNuevo1, $columnaBuscar, $queBuscar);
 // $orden que es DESC o ASC
 // para DB con limites usar mysql14
 function mysql23($campo, $tabla, $columna, $buscarEnColumna, $colOrden, $orden){
-	$query01="SELECT $campo FROM $tabla WHERE $columna = '$buscarEnColumna' ORDER BY $colOrden $orden ;";
+	$query01="SELECT $campo FROM $tabla WHERE $columna = '$buscarEnColumna' ORDER BY $colOrden $orden ";
     $query02=mysql_query($query01);
 	$resultado = array();
 	while($line = mysql_fetch_array($query02, MYSQL_ASSOC)){
@@ -534,6 +515,16 @@ function mysql23($campo, $tabla, $columna, $buscarEnColumna, $colOrden, $orden){
 	return $resultado;
 
 /*
+Como usar
+$campo = '';
+$tabla = '';
+$columna = '';
+$buscarEnColumna = '';
+$colOrden = '';
+$orden = '';
+$resultado = mysql23($campo, $tabla, $columna, $buscarEnColumna, $colOrden, $orden);
+
+
 Como ver los datos
 foreach( $resultado as $value){
 	foreach( $value as $value){
@@ -1117,12 +1108,28 @@ function enlace01($web,$texto){
 // recibe array de 2 valores y devuelve tabla completa
 function tabla01($array01){
 	$i = '0';
-	$array02[$i++] = "<table border=\"1\">";
+	$array02[$i++] = "<table id=\"one-column-emphasis\" >\n
+    <colgroup>\n
+    	<col class=\"oce-first\" />\n
+    </colgroup>\n
+    <tbody>\n";
 	foreach( $array01 as $key => $value){
 		$array02[$i++] = "<tr><td>".$key."</td><td>".$value."</td></tr>\n";
 	}
-	$array02[$i++] = "</table>";
+	$array02[$i++] = "</tbody>\n</table>\n";
 	return $array02;
+/*
+<table id=\"one-column-emphasis\" >
+    <colgroup>
+    	<col class=\"oce-first\" />
+    </colgroup>
+    <tbody>
+    	<tr>
+        	<td></td>
+        </tr>
+    </tbody>
+</table>
+*/
 }
 
 // recibe array de 2 valores y devuelve tabla completa con una columna extra

@@ -1,9 +1,6 @@
 <?php
-session_start();
-include('inc/framework.php');
-mysql00();
 /*
-<!--
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -36,6 +33,9 @@ mysql00();
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
+session_start();
+include('inc/framework.php');
+mysql00();
 
 if( isset($_POST['login']) ){
 	$usuario = filter_var($_POST['usuario'], FILTER_SANITIZE_STRING);
@@ -52,14 +52,14 @@ if( isset($_POST['login']) ){
 			if ( $datosDB[1] == '1' ){
 				session_regenerate_id(); // genera nuevo ID de session
 				$_SESSION['AuthenticatedAD'] = 1;
-				$_SESSION['id_usuarioAD'] = $datosDB[1];
+				$_SESSION['usuarioId'] = $datosDB[1];
 				$_SESSION['usuario'] = $usuario;
 				session_write_close();
 				echo "<meta http-equiv='refresh' content='0;URL=admin/'>";
 			} else{
 				session_regenerate_id(); // genera nuevo ID de session
 				$_SESSION['Authenticated'] = 1;
-				$_SESSION['id_usuario'] = $datosDB[1];
+				$_SESSION['usuarioId'] = $datosDB[1];
 				$_SESSION['usuario'] = $usuario;
 				session_write_close();
 				echo "<meta http-equiv='refresh' content='0;URL=usuario/'>";

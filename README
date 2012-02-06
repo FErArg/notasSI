@@ -1,26 +1,47 @@
-En el despacho utilizamos ownCloud v.3, conectando con el servidor por medio de WebDAV, para enviar y almacenar información y archivos que necesitamos acceder desde nuestros teléfonos inteligentes, tabletas y/o desde la web.
+notaSI+ - Beta 4
 
-Una de las funcionas que mas utilizamos desde las tabletas, es la función de enviar enlaces al Servidor para leerlos mas tarde, al estilo de Evernote o Catch.
+Actualización 2012-02-06 -----------------------------------------------------------------------------------------------------------------
 
-En las tabletas Android utilizamos el software WebDAV File Manager, ENLACE, este programa crea en el apartado personal de cada usuario del ownCloud un archivo, que utiliza de almacén de enlaces, llamado “ShareURL.html”.
+Novedades:
+- Modificado el código y la base de datos para que funcione con varios usuarios
+- Modificado el código de "usuario/cargar.php" para que Controle que no se duplique la carga del mismo enlace
+- Modificado el código de "usuario/eliminar3.php" para que no elimine el enlace, sino que lo marque como eliminado
+- Modificado el código de "usuario/ver.php" para que solo muestre los enlaces del usuario y que no se hayan eliminado
 
-El archivo “ShareURL.html” es donde el WebDAV File Manager almacena los enlaces, uno sobre otro, y el usuario no puede hacer modificaciones ni agregar mas información que la que este programa envía al Servidor.
+Pendiente:
+- Panel de Administración de Usuarios (Alta, Baja, Modificar)
+- Cambio clave de acceso por el usuario
+- Recuperar clave de Acceso
+- Hoja Estilo de toda la web
+- Manejo de tags del enlace (Alta, Baja, Modificar)
 
-Una función que echamos en falta fue el poder eliminar los enlaces, una vez visitados, o modificarlos, para ello reutilizamos una aplicación que escribimos hace un tiempo, notasSI, y la adaptamos para que leyese el archivo “ShareURL.html” y almacenase los enlaces en una base de datos y poder “trabajar” sobre los enlaces desde un navegador web.
 
-El programa es muy sencillo, está en fase beta, y nos falta aún mucha programación, la aplicación, que llamamos notasSI+, funciona de la siguiente manera:
+Detalle ----------------------------------------------------------------------------------------------------------------------------------
 
-1- Leer el archivo “ShareURL.html” desde los documentos del usuario
+En el despacho utilizamos ownCloud v.3, conectando con el servidor por medio de WebDAV, para enviar y almacenar información y archivos que
+necesitamos acceder desde nuestros teléfonos inteligentes, tabletas y/o desde la web.
+
+Una de las funcionas que mas utilizamos desde las tabletas, es la función de enviar enlaces al Servidor para leerlos mas tarde, al estilo
+de Evernote o Catch.
+
+En las tabletas Android utilizamos el software WebDAV File Manager, ENLACE, este programa crea en el apartado personal de cada usuario del
+ownCloud un archivo, que utiliza de almacén de enlaces, llamado “ShareURL.html”.
+
+El archivo “ShareURL.html” es donde el WebDAV File Manager almacena los enlaces, uno sobre otro, y el usuario no puede hacer modificaciones
+ni agregar mas información que la que este programa envía al Servidor.
+
+Una función que echamos en falta fue el poder eliminar los enlaces, una vez visitados, o modificarlos, para ello reutilizamos una aplicación
+que escribimos hace un tiempo, notasSI, y la adaptamos para que leyese el archivo “ShareURL.html” y almacenase los enlaces en una base de
+datos y poder “trabajar” sobre los enlaces desde un navegador web.
+
+El programa es muy sencillo, está en fase beta, y nos falta aún mucha programación, la aplicación, que llamamos notasSI+, funciona de la
+siguiente manera:
+
+1- Lee el archivo “ShareURL.html” desde los documentos del usuario (Configuración en "inc/framework.php")
 2- Procesa el contenido, ( Título, Fecha, Enlace )
 3- Carga los datos en la base de datos
-4- Renombra el archivo “ShareURL.html”
-
-Accediendo a la página principal de notasSI+, se muestra una tabla con todas las notas.
-
-Aún nos falta programar:
-1- Acceso a notasSI+ utilizando usuario / clave
-2- Panel de configuración y administración de usuarios
-3- Función de multiusuario, solo funciona con un solo usuario
+4- Renombra el archivo “ShareURL.html” y lo mueve a al directorio "URL_Cargados" dentro del directorio del usuario en ownCloud
+   ( se configura en el archivo "usuario/cargar.php")
 
 
 Para acceder al código fuente, en nuestra repositorio de GitHUB, en el archivo “inc/framework.php” se deben configurar :

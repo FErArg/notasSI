@@ -1,16 +1,6 @@
 <?php
-session_start();
-include('../inc/framework.php');
-include('../inc/header.php');
-
-if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
-mysql00();
-$array01 = menu01();
-foreach ( $array01 as $value){
-	echo $value;
-}
-?>
-<!--
+/*
+ <!--
 	/**************************************************************************************************
 	#     Copyright (c) 2008, 2009, 2010, 2011, 2012 Fernando A. Rodriguez para SerInformaticos.es    #
 	#                                                                                                 #
@@ -43,7 +33,19 @@ foreach ( $array01 as $value){
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
--->
+
+session_start();
+include('../inc/framework.php');
+include('../inc/header.php');
+
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
+$array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
+?>
+
 <div class="cabecera">
 </div><!-- CAB -->
 

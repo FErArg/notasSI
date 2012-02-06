@@ -3,13 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2012 at 07:36 PM
+-- Generation Time: Feb 06, 2012 at 07:50 AM
 -- Server version: 5.1.49
--- PHP Version: 5.3.3-7+squeeze3
+-- PHP Version: 5.3.3-7+squeeze7
 
 
+-- www.SerInformaticos.es
 
--- SerInformaticos.es
 
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -21,7 +21,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `catchSI`
+-- Database: `notasSI+`
 --
 
 -- --------------------------------------------------------
@@ -32,11 +32,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `notas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `titulo` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `texto` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `enlace` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `enlace` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
   `tag` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `eliminado` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 

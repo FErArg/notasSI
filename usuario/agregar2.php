@@ -1,10 +1,4 @@
 <?php
-session_start();
-include('../inc/framework.php');
-include('../inc/header.php');
-
-if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
-mysql00();
 /*
  <!--
 	/**************************************************************************************************
@@ -40,6 +34,12 @@ mysql00();
 	#                                                                                                 #
 	**************************************************************************************************/
 
+session_start();
+include('../inc/framework.php');
+include('../inc/header.php');
+
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
 
 extract($_POST);
 /*

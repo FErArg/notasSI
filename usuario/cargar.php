@@ -1,10 +1,4 @@
 <?php
-session_start();
-include('../inc/framework.php');
-include('../inc/header.php');
-
-if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
-mysql00();
 /*
  <!--
 	/**************************************************************************************************
@@ -39,6 +33,12 @@ mysql00();
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
+session_start();
+include('../inc/framework.php');
+include('../inc/header.php');
+
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
 $array01 = menu01();
 foreach ( $array01 as $value){
 	echo $value;
@@ -128,38 +128,33 @@ foreach( $theData3 as $value ){
 		$columna1 = 'titulo';
 		$queBuscar1 = $value['titulo'];
 		$resultado1 = mysql02($campos,$tabla,$columna1,$queBuscar1);
-		echo $resultado1."<br /> \n";
+//		echo $resultado1."<br /> \n";
 
-		$campos = 'id';
-		$tabla = 'notas';
-		$columna1 = 'fecha';
-		$queBuscar1 = $value['fecha'];
-		$resultado2 = mysql02($campos,$tabla,$columna1,$queBuscar1);
-		echo $resultado2."<br /> \n";
 
 		$campos = 'id';
 		$tabla = 'notas';
 		$columna1 = 'enlace';
 		$queBuscar1 = $value['enlace'];
 		$resultado3 = mysql02($campos,$tabla,$columna1,$queBuscar1);
-		echo $resultado3."<br /> \n";
+//		echo $resultado3."<br /> \n";
 
-		if( empty($resultado1) OR empty($resultado2) OR empty($resultado3) ){
-			echo "A<br />\n";
-			mysql_query("insert into notas (titulo, fecha, texto, enlace, tag)
-				values ('$value[titulo]','$value[fecha]','Sin Contenido','$value[enlace]','ownCloud')");
+		if( empty($resultado1) OR empty($resultado3) ){
+			// echo $resultado1 ." - ". $resultado3 ."<br />\n";
+			mysql_query("insert into notas (usuario, titulo, fecha, texto, enlace, tag, eliminado)
+				values ('$usuarioId','$value[titulo]','$value[fecha]','Sin Contenido','$value[enlace]','ownCloud','0')");
 		}
+
 	}
 }
 
-rename($myFile, $myFile2);
+// rename($myFile, $myFile2);
 /*
 echo "<pre>";
 print_r($theData3);
 echo "</pre>";
 */
 
-// echo "<meta http-equiv='refresh' content='0;URL=ver.php'>";
+echo "<meta http-equiv='refresh' content='0;URL=ver.php'>";
 ?>
 
 <?php
