@@ -1,5 +1,11 @@
 notaSI+ - Beta 4
 
+AVISO
+
+El primer usuario del sistema tiene que agregarse desde MySQL y su ide tiene que ser diferente a "1", ya que el sistema toma el id "1"
+como el ID del usuario administrador
+
+
 Actualización 2012-02-06 -----------------------------------------------------------------------------------------------------------------
 
 Novedades:
