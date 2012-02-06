@@ -107,7 +107,7 @@ echo "<table id=\"one-column-emphasis\" >
 			echo "T&iacute;tulo";
 		echo "</td>\n";
 		echo "<td>";
-			echo "<input type=\"text\" class=\"text\" name=\"titulo2\" size=\"50\" maxlength=\"50\" value=\"".$array01['Titulo']."\" />";
+			echo "<input type=\"text\" class=\"text\" name=\"titulo2\" size=\"50\" maxlength=\"100\" value=\"".$array01['Titulo']."\" />";
 		echo "</td>\n";
 	echo "</tr>\n";
 	echo "<tr>";
@@ -115,7 +115,7 @@ echo "<table id=\"one-column-emphasis\" >
 			echo "Nota";
 		echo "</td>\n";
 		echo "<td>";
-			echo "<textarea cols=\"50\" rows=\"3\" name=\"texto2\">".$array01['Nota']."</textarea>";
+			echo "<textarea cols=\"50\" rows=\"10\" name=\"texto2\">".$array01['Nota']."</textarea>";
 		echo "</td>\n";
 	echo "</tr>\n";
 	echo "<tr>";
