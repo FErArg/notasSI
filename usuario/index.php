@@ -35,24 +35,19 @@
 	**************************************************************************************************/
 session_start();
 include('../inc/framework.php');
-include('../inc/header.php');
+// include('../inc/header.php');
 
 if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
 mysql00();
-$array01 = menu01();
-foreach ( $array01 as $value){
-	echo $value;
-}
 
 
 $var=<<<_INICIO
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-<title>Your Page Title</title>
+<title>enlaceSI</title>
 <meta http-equiv="REFRESH" content="0;url=cargar.php"></HEAD>
 <BODY>
-Optional page text here.
 </BODY>
 </HTML>
 _INICIO;
@@ -64,5 +59,5 @@ echo $var;
 		print"<br />\n<a href=\"../index.php\" class=\"botonR\">Volver</a><br /><br />\n";
 }
 // Control de la sesion ----------------------------------------------------------------------
-include('../inc/footer.php');
+// include('../inc/footer.php');
 ?>
