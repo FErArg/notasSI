@@ -1,6 +1,7 @@
 notaSI+ - Beta 5
 Actualización 2012-02-07 -----------------------------------------------------------------------------------------------------------------
 Novedades
+- Visionado de todos los enlaces de un mismo Tag - "usuario/ver3.php"
 - Contador de Visitas al enlace
 - Agregado "usuario/ver3.php"
 - Modificada DB para contabilizar las visitas - Tabla Notas Columna visitas
@@ -9,6 +10,7 @@ Novedades
 - Modificado "index.php" - formulario de login con estilo
 - Agregado hoja de Estilo en tablas
 - Modificado el Código para utilizar micro Framework de SerInformaticos
+- Actualizado codigo y rectificado errores
 
 Pendiente:
 - Panel de Administración de Usuarios (Alta, Baja, Modificar)
