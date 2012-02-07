@@ -40,6 +40,10 @@ include('../inc/header.php');
 if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
 mysql00();
 $array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
+
 
 $today = date("y-m-d");
 $random = php05('0','1000');
@@ -87,8 +91,8 @@ foreach( $theData2 as $key => $value ){
 $totalAray = count($theData2);
 $totalAray = $totalAray / 3;
 
-// echo "<br>\n";
-// echo "<br>\n";
+echo "<br>\n";
+echo "<br>\n";
 $i = '0';
 $j = '1';
 $k = '2';

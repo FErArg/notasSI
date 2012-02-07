@@ -33,123 +33,103 @@
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
-include('inc/framework.php');
-include('inc/header.php');
+session_start();
+include('../inc/framework.php');
+include('../inc/header.php');
+
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
+$array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
 ?>
- <STYLE type="text/css">
-body{ 
- font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
- font-size:12px;
-}
-p, h1, form, button{
-	 border:0; margin:0; padding:0;
-}
-.spacer{
-clear:both; height:1px;
-}
 
-.myform{ 
-margin:0 auto;
-width:400px;
-padding:14px;
-}
+<div class="cabecera">
+</div><!-- CAB -->
 
-#stylized{
-border:solid 2px #b7ddf2;
-background:#ebf4fb;
-}
-#stylized h1 {
-font-size:14px;
-font-weight:bold;
-margin-bottom:8px;
-}
-#stylized p{
-font-size:11px;
-color:#666666;
-margin-bottom:20px;
-border-bottom:solid 1px #b7ddf2;
-padding-bottom:10px;
-}
-#stylized label{
-display:block;
-font-weight:bold;
-text-align:right;
-width:140px;
-float:left;
-}
-#stylized .small{
-color:#666666;
-display:block;
-font-size:11px;
-font-weight:normal;
-text-align:right;
-width:140px;
-}
-#stylized input{
-float:left;
-font-size:12px;
-padding:4px 2px;
-border:solid 1px #aacfe4;
-width:200px;
-margin:2px 0 20px 10px;
-}
-#stylized button{
-clear:both;
-margin-left:150px;
-width:125px;
-height:31px;
-background:#666666 url(img/button.png) no-repeat;
-text-align:center;
-line-height:31px;
-color:#FFFFFF;
-font-size:11px;
-font-weight:bold;
-}
- </STYLE>
+<div class="medio">
 
-<div id="stylized" class="myform">
-<p>notaSI+</p>
-<form action="check.php" method="post">
-	<label>	Usuario</label>
-		<input type="text" name="usuario" size=10 />
-	<label>Clave</label>
-		<input type="password" name="clave" size=10 />
-<input type="hidden" name="login" />
-<button type="submit">Entrar</button>
-<div class="spacer"></div>
-
-</form>
-</div>
-<!--
-<table style="text-align: center; width: 100%; heigh: 100%;">
-	<tr style="vertical-align: middle; text-align: center;">
-		<td>
-	<div class="login-block">
-			<form action="check.php" method="post">
-				<table>
-				<tr>
-					<td>Usuario</td>
-					<td><input type="text" name="usuario" size=10 /></td>
-				</tr>
-				<tr>
-					<td>Clave</td>
-					<td><input type="password" name="clave" size=10 /></td>
-				</tr>
-				<tr>
-					<td><input type="hidden" name="login" /></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td><p class="submit-wrap"><input type="reset"></p></td>
-					<td><p class="submit-wrap"><input name="send" type="submit" value="Entrar"></p></td>
-				</tr>
-				</table>
-			</form>
- </div>
-	</td>
- </tr>
- </table>
--->
 <?php
-include('inc/footer.php');
+print "<br />\n";
+$campos = 'id, titulo, fecha, tag, enlace';
+$tabla1 = 'notas';
+$columna1 = 'usuario';
+$queBuscar1 = $usuarioId;
+$columna2 = 'eliminado';
+$queBuscar2 = '0';
+$colOrden = 'id';
+$orden = 'DESC';
+$resultado = mysql25($campos, $tabla1, $columna1, $queBuscar1, $columna2, $queBuscar2, $colOrden, $orden);
+
+
+echo "<table id=\"box-table-a\" summary=\"Listado de Enlaces\">\n";
+echo "<thead>
+    	<tr>
+        	<th scope=\"col\"> ID </th><th scope=\"col\"> Enlace </a></th><th scope=\"col\"> Fecha </th></tr></thead><tbody>\n";
+foreach($resultado as $value){
+		echo "<tr>\n";
+		echo "<td>".$value['id']."</td><td>\n";
+
+		echo "<table border=\"0\" width=\"100%\">\n";
+		echo "<tr>\n";
+
+		// echo "<tr>\n<td colspan=\"3\">\n<a href=\"".$value['enlace']."\">".$value['titulo']."</a></td>\n</tr>\n";
+		echo "<td width=\"100%\"><a href=\"".$value['enlace']."\" target=\"_blank\">".$value['titulo']."</a></td>\n";
+
+
+		// Ver
+		$ver = <<<_VER
+		<td>\n
+		<form method="POST" action="ver2.php">
+			<input name="id" type="hidden" value="$value[id]">
+			<input name="send" type="submit" value="Ver">
+		</form>
+		</td>\n
+_VER;
+		echo $ver;
+
+		// editar
+		$editar = <<<_EDITAR
+		<td>\n
+		<form method="POST" action="editar2.php">
+			<input name="id" type="hidden" value="$value[id]">
+			<input name="send" type="submit" value="Editar">
+		</form>
+		</td>\n
+_EDITAR;
+		echo $editar;
+
+		// eliminar
+		$eliminar = <<<_ELIMINAR
+		<td>\n
+		<form method="POST" action="eliminar3.php">
+			<input name="id" type="hidden" value="$value[id]">
+			<input name="tabla" type="hidden" value="notas">
+			<input name="send" type="submit" value="Eliminar">
+		</form>
+		</td>\n
+_ELIMINAR;
+		echo $eliminar;
+
+		echo "</tr>\n</table>\n";
+		echo "</td>\n<td>".$value['fecha']."</td>\n";
+		echo "</tr>\n";
+}
+echo "</tbody></table>\n";
+
+?>
+</div><!-- Medio -->
+
+<div class="pie">
+</div><!-- pie -->
+
+<?php
+// Control de la sesion ----------------------------------------------------------------------
+} else{
+		print"<h3>No ha iniciado Sesi&oacute;n Correctamente</h3><br />\n";
+		print"<br />\n<a href=\"../index.php\" class=\"botonR\">Volver</a><br /><br />\n";
+}
+// Control de la sesion ----------------------------------------------------------------------
+include('../inc/footer.php');
 ?>

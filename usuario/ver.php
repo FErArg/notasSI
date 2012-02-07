@@ -52,7 +52,7 @@ foreach ( $array01 as $value){
 
 <?php
 print "<br />\n";
-$campos = 'id, titulo, fecha, tag, enlace';
+$campos = 'id, titulo, fecha, tag, enlace, visitas';
 $tabla1 = 'notas';
 $columna1 = 'usuario';
 $queBuscar1 = $usuarioId;
@@ -66,7 +66,7 @@ $resultado = mysql25($campos, $tabla1, $columna1, $queBuscar1, $columna2, $queBu
 echo "<table id=\"box-table-a\" summary=\"Listado de Enlaces\">\n";
 echo "<thead>
     	<tr>
-        	<th scope=\"col\"> ID </th><th scope=\"col\"> Enlace </a></th><th scope=\"col\"> Fecha </th></tr></thead><tbody>\n";
+        	<th scope=\"col\"> ID </th><th scope=\"col\"> Enlace </a></th><th scope=\"col\"> Visitas </th><th scope=\"col\"> Fecha </th></tr></thead><tbody>\n";
 foreach($resultado as $value){
 		echo "<tr>\n";
 		echo "<td>".$value['id']."</td><td>\n";
@@ -75,7 +75,9 @@ foreach($resultado as $value){
 		echo "<tr>\n";
 
 		// echo "<tr>\n<td colspan=\"3\">\n<a href=\"".$value['enlace']."\">".$value['titulo']."</a></td>\n</tr>\n";
-		echo "<td width=\"100%\"><a href=\"".$value['enlace']."\">".$value['titulo']."</a></td>\n";
+		echo "<td width=\"100%\">";
+		echo "<a href=\"ver3.php?e=".$value['enlace']."&i=".$value['id']."\" target=\"_blank\">".$value['titulo']."</a>";
+		echo "</td>\n";
 
 
 		// Ver
@@ -113,6 +115,7 @@ _ELIMINAR;
 		echo $eliminar;
 
 		echo "</tr>\n</table>\n";
+		echo "</td>\n<td>".$value['visitas']."</td>\n";
 		echo "</td>\n<td>".$value['fecha']."</td>\n";
 		echo "</tr>\n";
 }

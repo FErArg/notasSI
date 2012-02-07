@@ -40,6 +40,9 @@ include('../inc/header.php');
 if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
 mysql00();
 $array01 = menu01();
+foreach ( $array01 as $value){
+	echo $value;
+}
 ?>
 
 <div class="cabecera">

@@ -33,123 +33,42 @@
 	#       Web:      www.SerInformaticos.es                                                          #
 	#                                                                                                 #
 	**************************************************************************************************/
-include('inc/framework.php');
-include('inc/header.php');
-?>
- <STYLE type="text/css">
-body{ 
- font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
- font-size:12px;
-}
-p, h1, form, button{
-	 border:0; margin:0; padding:0;
-}
-.spacer{
-clear:both; height:1px;
-}
+session_start();
+include('../inc/framework.php');
 
-.myform{ 
-margin:0 auto;
-width:400px;
-padding:14px;
-}
+if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
+mysql00();
 
-#stylized{
-border:solid 2px #b7ddf2;
-background:#ebf4fb;
-}
-#stylized h1 {
-font-size:14px;
-font-weight:bold;
-margin-bottom:8px;
-}
-#stylized p{
-font-size:11px;
-color:#666666;
-margin-bottom:20px;
-border-bottom:solid 1px #b7ddf2;
-padding-bottom:10px;
-}
-#stylized label{
-display:block;
-font-weight:bold;
-text-align:right;
-width:140px;
-float:left;
-}
-#stylized .small{
-color:#666666;
-display:block;
-font-size:11px;
-font-weight:normal;
-text-align:right;
-width:140px;
-}
-#stylized input{
-float:left;
-font-size:12px;
-padding:4px 2px;
-border:solid 1px #aacfe4;
-width:200px;
-margin:2px 0 20px 10px;
-}
-#stylized button{
-clear:both;
-margin-left:150px;
-width:125px;
-height:31px;
-background:#666666 url(img/button.png) no-repeat;
-text-align:center;
-line-height:31px;
-color:#FFFFFF;
-font-size:11px;
-font-weight:bold;
-}
- </STYLE>
 
-<div id="stylized" class="myform">
-<p>notaSI+</p>
-<form action="check.php" method="post">
-	<label>	Usuario</label>
-		<input type="text" name="usuario" size=10 />
-	<label>Clave</label>
-		<input type="password" name="clave" size=10 />
-<input type="hidden" name="login" />
-<button type="submit">Entrar</button>
-<div class="spacer"></div>
+// $enlace = $_GET[e];
+// $id = $_GET[i];
+$enlace = filter_var($_GET[e], FILTER_SANITIZE_STRING);
+$id = filter_var($_GET[i], FILTER_SANITIZE_STRING);
 
-</form>
-</div>
-<!--
-<table style="text-align: center; width: 100%; heigh: 100%;">
-	<tr style="vertical-align: middle; text-align: center;">
-		<td>
-	<div class="login-block">
-			<form action="check.php" method="post">
-				<table>
-				<tr>
-					<td>Usuario</td>
-					<td><input type="text" name="usuario" size=10 /></td>
-				</tr>
-				<tr>
-					<td>Clave</td>
-					<td><input type="password" name="clave" size=10 /></td>
-				</tr>
-				<tr>
-					<td><input type="hidden" name="login" /></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td><p class="submit-wrap"><input type="reset"></p></td>
-					<td><p class="submit-wrap"><input name="send" type="submit" value="Entrar"></p></td>
-				</tr>
-				</table>
-			</form>
- </div>
-	</td>
- </tr>
- </table>
--->
-<?php
-include('inc/footer.php');
+
+// echo $enlace ." - ". $id."<br />\n";
+
+// pedir nro visitas
+$campos = 'visitas';
+$tabla = 'notas';
+$columna1 = 'id';
+$queBuscar1 = $id;
+$resultado = mysql02($campos,$tabla,$columna1,$queBuscar1);
+// echo $resultado."<br />\n";
+
+// sumar visitas
+$visitasN = $resultado + 1;
+
+// actualizar visitas
+mysql_query("update notas set visitas='$visitasN' where id='$id'");
+
+// ir a enlace
+echo "<meta http-equiv='refresh' content='0;URL=".$enlace."'>";
+
+// Control de la sesion ----------------------------------------------------------------------
+} else{
+		print"<h3>No ha iniciado Sesi&oacute;n Correctamente</h3><br />\n";
+		print"<br />\n<a href=\"../index.php\" class=\"botonR\">Volver</a><br /><br />\n";
+}
+// Control de la sesion ----------------------------------------------------------------------
 ?>

@@ -43,7 +43,7 @@ $var1 =<<<INICIO
 	<title>notasSI+ - Beta 4 - SerInformaticos</title>
 </head>
 <body>
-<h2>notaSI+ - Beta // SerInformaticos</h2>
+<h2>enlacesSI Beta 4 // SerInformaticos</h2>
 INICIO;
 
 echo $var1;

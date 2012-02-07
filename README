@@ -1,11 +1,24 @@
+notaSI+ - Beta 5
+Actualización 2012-02-07 -----------------------------------------------------------------------------------------------------------------
+Novedades
+- Contador de Visitas al enlace
+- Agregado "usuario/ver3.php"
+- Modificada DB para contabilizar las visitas - Tabla Notas Columna visitas
+- Modificado "usuario/ver.php" para visualizar el numero de visitas
+- Agregado botones de "Ver, Editar, Eliminar" en "usuario/ver.php"
+- Modificado "index.php" - formulario de login con estilo
+- Agregado hoja de Estilo en tablas
+- Modificado el Código para utilizar micro Framework de SerInformaticos
+
+Pendiente:
+- Panel de Administración de Usuarios (Alta, Baja, Modificar)
+- Cambio clave de acceso por el usuario
+- Recuperar clave de Acceso
+- Hoja Estilo de toda la web
+- Manejo de tags del enlace (Alta, Baja, Modificar)
+
+
 notaSI+ - Beta 4
-
-AVISO
-
-El primer usuario del sistema tiene que agregarse desde MySQL y su ide tiene que ser diferente a "1", ya que el sistema toma el id "1"
-como el ID del usuario administrador
-
-
 Actualización 2012-02-06 -----------------------------------------------------------------------------------------------------------------
 
 Novedades:
@@ -21,7 +34,7 @@ Pendiente:
 - Hoja Estilo de toda la web
 - Manejo de tags del enlace (Alta, Baja, Modificar)
 
-
+notaSI+ - Beta
 Detalle ----------------------------------------------------------------------------------------------------------------------------------
 
 En el despacho utilizamos ownCloud v.3, conectando con el servidor por medio de WebDAV, para enviar y almacenar información y archivos que

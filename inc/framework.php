@@ -126,10 +126,10 @@ foreach( menu01() as $value){
 // Conecta con DB
 function mysql00($servidor,$usuario,$clave,$db){
 	if ( empty($servidor) AND empty($usuario) AND empty($clave) AND empty($db) ){
-		$servidor="SERVIDOR";
-		$usuario="USUARIO";
-		$clave="CLAVE";
-		$db="DB";
+		$servidor="localhost";
+		$usuario="catchSI";
+		$clave="156379FErArg";
+		$db="catchSI";
 	}
 
 	$enlace=mysql_connect($servidor,$usuario,$clave);
