@@ -39,21 +39,143 @@ include('../inc/header.php');
 
 if ( isset($_SESSION['Authenticated']) AND $_SESSION['Authenticated'] == 1 ){
 mysql00();
-?>
 
-<?php
-extract($_POST);
+$today = date("y-m-d");
+$random = php05('1000','9999');
+$myFile = $directorio."/ShareURL.html";
+$myFile2 = $directorio."/URL_Cargados/ShareURL.".$today."-".$random.".html";
+
+$fh = fopen($myFile, 'r');
+$theData = fread($fh, filesize($myFile));
+fclose($fh);
+
+// print $theData;
+
+$theData = str_replace('<html>', '', $theData);
+$theData = str_replace('<head>', '', $theData);
+$theData = str_replace('</head>', '', $theData);
+$theData = str_replace('</html>', '', $theData);
+$theData = str_replace('<meta http-equiv="Content-Type" content="text/html ; charset=utf-8">', '', $theData);
+$theData = str_replace('<body>', '', $theData);
+$theData = str_replace('</body>', '', $theData);
+$theData = str_replace('<br><br>', '<br>', $theData);
+$theData = str_replace('á', '&aacute;', $theData);
+$theData = str_replace('é', '&eacute;', $theData);
+$theData = str_replace('í', '&iacute;', $theData);
+$theData = str_replace('ó', '&oacute;', $theData);
+$theData = str_replace('ú', '&uacute;', $theData);
+$theData = str_replace('–', '-', $theData);
+$theData = str_replace("'", '-', $theData);
+
+$theData = trim($theData);
+
+$theData2 = explode("<br>", $theData);
+
+$h = '0';
+foreach( $theData2 as $key => $value ){
+  if( isset($value) AND $value != '' AND $value != ' '){
+    // unset($theData2[$key]);
+	$value = trim($value);
+	$value = rtrim($value);
+	$value = strip_tags($value);
+	$theData2[$h] = $value;
+	$h++;
+  }
+}
+
+
+$totalAray = count($theData2);
+$totalAray = $totalAray / 3;
+
+// echo "<br>\n";
+// echo "<br>\n";
+
+$i = '0';
+$j = '1';
+$k = '2';
+$theData3 = array();
+for( $ii = '0' ; $ii < $totalAray ; $ii++ ){
+	$theData3[$ii]['titulo'] = $theData2[$i];
+
+	$j = $i + 1;
+	$theData3[$ii]['fecha'] = $theData2[$j];
+
+	$k = $j + 1;
+	$theData3[$ii]['enlace'] = $theData2[$k];
+
+//	echo "titulo: ".$theData3[$ii]['titulo']."<br>\n";
+//	echo "fecha: ".$theData3[$ii]['fecha']."<br>\n";
+//	echo "link: ".$theData3[$ii]['enlace']."<br>\n";
+//	echo "<br>\n";
+
+	$i = $k + 1;
+}
+
+
+
+// elimina el ultimo elemento del array si esta vacio
+if( empty($theData3[$ii]['titulo']) AND empty($theData3[$ii]['fecha']) AND empty($theData3[$ii]['enlace']) ){
+	array_pop($theData3);
+}
+
+$nroEnlacesCargar = count($theData3);
+
+$m = '0';
+$pasadas = '3';
+
+echo "<h3>Enlaces a Cargar</h3><br />\n";
+// Carga 3 veces el mismo documentos antes de renombrarlo
+for( $l = '0'; $l < $pasadas; $l++ ){
+	foreach( $theData3 as $value ){
+		if( $value['titulo'] != '' ){
+			// comprueba que no exista el enlace en el servidor
+
+//			echo $value['titulo']."<br />\n";
+
+//			echo $value['fecha']."<br />\n";
+//			echo $value['enlace']."<br />\n";
+
+
+			$campos = 'id';
+			$tabla = 'notas';
+			$columna1 = 'titulo';
+			$queBuscar1 = $value['titulo'];
+			$resultado1 = mysql02($campos,$tabla,$columna1,$queBuscar1);
+//			echo $resultado1."<br /> \n";
+
+
+			$campos = 'id';
+			$tabla = 'notas';
+			$columna1 = 'enlace';
+			$queBuscar1 = $value['enlace'];
+			$resultado3 = mysql02($campos,$tabla,$columna1,$queBuscar1);
+//			echo $resultado3."<br /> \n";
+
+			if( empty($resultado1) OR empty($resultado3) ){
+				// echo $resultado1 ." - ". $resultado3 ."<br />\n";
+				mysql_query("insert into notas (usuario, titulo, fecha, texto, enlace, tag, eliminado)
+					values ('$usuarioId','$value[titulo]','$value[fecha]','Sin Contenido','$value[enlace]','ownCloud','0')");
+				$m++;
+//				echo $value['titulo']."<br />";
+//				echo mysql_error()."<br />";
+			}
+
+		}
+	}
+}
+$nroEnlacesCargados = $m/$pasadas;
+// rename($myFile, $myFile2);
+
 /*
 echo "<pre>";
-print_r($_POST);
+print_r($theData3);
 echo "</pre>";
 */
-
-mysql_query("UPDATE notas SET eliminado='1' WHERE id='$id'");
-
-// redireccionar de nuevo a index
-echo mysql_error();
-echo "<meta http-equiv='refresh' content='0;URL=index.php'>";
+/*
+echo "<h3>".$nroEnlacesCargar." enlaces a Cargar</h3><br />\n";
+echo "<h3>".$nroEnlacesCargados." enlaces Nuevos</h3><br />\n";
+*/
+echo "<meta http-equiv='refresh' content='0;URL=ver.php'>";
 ?>
 
 <?php
@@ -63,4 +185,5 @@ echo "<meta http-equiv='refresh' content='0;URL=index.php'>";
 		print"<br />\n<a href=\"../index.php\" class=\"botonR\">Volver</a><br /><br />\n";
 }
 // Control de la sesion ----------------------------------------------------------------------
+
 ?>

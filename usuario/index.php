@@ -46,7 +46,7 @@ $var=<<<_INICIO
 <html>
 <head>
 <title>enlaceSI</title>
-<meta http-equiv="REFRESH" content="0;url=cargar.php"></HEAD>
+<meta http-equiv="REFRESH" content="0;url=cargar1.php"></HEAD>
 <BODY>
 </BODY>
 </HTML>
