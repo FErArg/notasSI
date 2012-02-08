@@ -37,7 +37,7 @@ include('inc/framework.php');
 include('inc/header.php');
 ?>
  <STYLE type="text/css">
-body{ 
+body{
  font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
  font-size:12px;
 }
@@ -48,7 +48,7 @@ p, h1, form, button{
 clear:both; height:1px;
 }
 
-.myform{ 
+.myform{
 margin:0 auto;
 width:400px;
 padding:14px;
@@ -108,7 +108,7 @@ font-weight:bold;
  </STYLE>
 
 <div id="stylized" class="myform">
-<p>notaSI+</p>
+<p>enlaceSI</p>
 <form action="check.php" method="post">
 	<label>	Usuario</label>
 		<input type="text" name="usuario" size=10 />

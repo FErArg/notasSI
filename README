@@ -1,7 +1,17 @@
-notaSI+ - Beta 5
+notaSI+ - Beta 4
+Actualización 2012-02-08 -----------------------------------------------------------------------------------------------------------------
+Novedades
+- mejorado y modificado archivo de carga de enlaces "usuario/cargar.php"
+
+Pendiente:
+- Panel de Administración de Usuarios (Alta, Baja, Modificar)
+- Cambio clave de acceso por el usuario
+- Recuperar clave de Acceso
+- Hoja Estilo de toda la web
+- Manejo de tags del enlace (Alta, Baja, Modificar)
+
 Actualización 2012-02-07 -----------------------------------------------------------------------------------------------------------------
 Novedades
-- Visionado de todos los enlaces de un mismo Tag - "usuario/ver3.php"
 - Contador de Visitas al enlace
 - Agregado "usuario/ver3.php"
 - Modificada DB para contabilizar las visitas - Tabla Notas Columna visitas
@@ -10,7 +20,6 @@ Novedades
 - Modificado "index.php" - formulario de login con estilo
 - Agregado hoja de Estilo en tablas
 - Modificado el Código para utilizar micro Framework de SerInformaticos
-- Actualizado codigo y rectificado errores
 
 Pendiente:
 - Panel de Administración de Usuarios (Alta, Baja, Modificar)
